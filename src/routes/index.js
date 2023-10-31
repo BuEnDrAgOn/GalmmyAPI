@@ -1,7 +1,11 @@
 const { Router } = require('express');
 const router = Router();
-import areas from './areas'
+import services from './services'
+import users from './users'
+import appointment from './appointment'
 
-router.use('/areas', areas)
+router.use('/services', services)
+router.use('/users', users)
+router.use('/appointment', appointment)
 
 export default router;
