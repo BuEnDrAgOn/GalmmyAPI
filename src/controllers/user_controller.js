@@ -13,11 +13,12 @@ const show = async(req, res) => {
 
     let query = "select * from users where phone like $1;"
     const {phone} = req.body;
-
+    console.log(query, phone);
     const { rows } = await db.query(query, [phone])
 
     res.json( rows )
 }
+
 const showID = async(req, res) => {  
 
     let query = "select * from users where id = $1;"

@@ -23,10 +23,20 @@ const appointment = async(req, res) => {
 
 const show = async(req, res) => {
 
-    let query = "select * from appointment where id_user = $1;"
+    let query = `select 
+                    a.id,
+                    s.id,
+                    a.user_id,
+                    s.service,
+                    s.treatment,
+                    a.payment::float,
+                    to_char(a.date, 'DD/MM/YYYY | hh:mm:ss') date
+                    from appointment a
+                    inner join services s on s.id = a.service_id
+                    inner join users u on u.id = a.user_id
+                    where u.id = $1;`
 
     const {id_user} = req.params;
-    console.log(req.params)
 
     const { rows } = await db.query(query, [id_user])
 
