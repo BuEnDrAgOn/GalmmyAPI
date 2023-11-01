@@ -43,13 +43,15 @@ const create = async (req, res) => {
 }
 
 const update = async (req, res) => {
-    let query = 'update users set names, fathers_lastname, phone, password = $1 updated_at = now() where id = $2'
+    let query = 'update users set names = $1, fathers_lastname = $2, mothers_lastname = $3, direction = $4, updated_at = now() where id = $5'
  
     //esto es lo mismo que decir const name = req.body.name
     //esto es para poner las users de la base de datos
     const {id} = req.params;
-    const {names, fathers_lastname, phone, password} = req.body;
-    const roaster = await db.query(query, [names, fathers_lastname, phone, password, id])
+    console.log(req.params)
+    console.log(req.body);
+    const {names, fathers_lastname, mothers_lastname, direction} = req.body;
+    const roaster = await db.query(query, [names, fathers_lastname, mothers_lastname, direction, id])
 
     res.json('Area Actualizada Satisfactoriamente')
 

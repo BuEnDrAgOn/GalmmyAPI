@@ -26,19 +26,42 @@ const show = async(req, res) => {
     let query = `select 
                     a.id,
                     s.id,
-                    a.user_id,
+                    a.id_user,
                     s.service,
                     s.treatment,
                     a.payment::float,
-                    to_char(a.date, 'DD/MM/YYYY | hh:mm:ss') date
+                    to_char(a.date, 'DD/MM/YYYY | hh:mm:ss AM') date
                     from appointment a
-                    inner join services s on s.id = a.service_id
-                    inner join users u on u.id = a.user_id
+                    inner join services s on s.id = a.id_service
                     where u.id = $1;`
 
     const {id_user} = req.params;
 
     const { rows } = await db.query(query, [id_user])
+
+    res.json( rows )
+}
+
+const showAll = async(req, res) => {
+
+    let query = `select 
+                    a.id,
+                    s.id,
+                    a.id_user,
+                    u.names,
+                    u.fathers_lastname,
+                    u.mothers_lastname,
+                    u.direction,
+                    u.phone,
+                    s.service,
+                    s.treatment,
+                    a.payment::float,
+                    to_char(a.date, 'DD/MM/YYYY | hh:mm:ss AM') date
+                    from appointment a
+                    inner join services s on s.id = a.id_service
+                    inner join users u on u.id = a.id_user`
+
+    const { rows } = await db.query(query)
 
     res.json( rows )
 }
@@ -73,6 +96,7 @@ module.exports = {
     index,
     appointment,
     show,
+    showAll,
     create,
     update,
 }
