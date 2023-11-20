@@ -33,6 +33,7 @@ const show = async(req, res) => {
                     to_char(a.date, 'DD/MM/YYYY | hh:mm:ss AM') date
                     from appointment a
                     inner join services s on s.id = a.id_service
+                    inner join users u on u.id = a.id_user
                     where u.id = $1;`
 
     const {id_user} = req.params;

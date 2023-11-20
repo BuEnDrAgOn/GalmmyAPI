@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  reports:
+    image: berenails-api
+    ports:
+      - "9393:8080"
+    env_file:
+      - .env
+    restart: on-failure
