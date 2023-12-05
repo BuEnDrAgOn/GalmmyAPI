@@ -57,7 +57,7 @@ const showAll = async(req, res) => {
                     s.service,
                     s.treatment,
                     a.payment::float,
-                    to_char(a.date, 'DD/MM/YYYY | hh:mm:ss AM') date
+                    to_char(a.date, 'DD/MM/YYYY | hh:mms:ss AM') date
                     from appointment a
                     inner join services s on s.id = a.id_service
                     inner join users u on u.id = a.id_user`
