@@ -33,12 +33,12 @@ const show = async(req, res) => {
 }
 
 const create = async (req, res) => {
-    let query = 'insert into services(service, treatment) values($1, $2);'
+    let query = 'insert into services(service, treatment, price) values($1, $2, $3);'
  
     //esto es lo mismo que decir const name = req.body.name
     //esto es para poner las services de la base de datos
-    const {service, treatment} = req.body;
-    const roaster = await db.query(query, [service, treatment])
+    const {service, treatment, price} = req.body;
+    const roaster = await db.query(query, [service, treatment, price])
 
     res.json('Area Creada Satisfactoriamente')
 
